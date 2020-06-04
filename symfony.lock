@@ -81,6 +81,9 @@
     "egulias/email-validator": {
         "version": "2.1.17"
     },
+    "mongodb/mongodb": {
+        "version": "1.6.0"
+    },
     "monolog/monolog": {
         "version": "2.1.0"
     },

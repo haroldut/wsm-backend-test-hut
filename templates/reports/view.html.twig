@@ -1,0 +1,83 @@
+<html lang="">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+    <title>Reports</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <style>
+        input {
+            outline: 0;
+            border-width: 0 0 1px;
+        }
+        input:focus {
+            border-color: skyblue;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script>
+        function find()
+            {            
+                window.location.href = "{{ url('demo_wsm') }}" + '?input=' + $("#findInput"). val();             
+            }
+        function showAll()
+            {            
+                window.location.href = "{{ url('demo_wsm') }}";            
+            }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="d-flex align-content-center">
+            <h1 class="mt-5">Hello ReportsController!</h1>
+            <img src="https://www.konfest.com/wp-content/uploads/2019/05/Konfest-PNG-JPG-Image-Pic-Photo-Free-Download-Royalty-Unlimited-clip-art-sticker-Check-Mark-Symbol-Right-Tick-Yes-Green-17.png" alt="" width="100">
+        </div>
+        <small>Please enter the account ID you'd like to display:</small>
+
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <div class="input-group">
+                    <label>
+                        <input type="text" placeholder="Account ID" id="findInput" value="{{ input }}">
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <button class="btn btn-info  btn-sm" onclick="find()">GET DATA</button>
+        <button class="btn btn-info  btn-sm" onclick="showAll()">SHOW ALL</button>
+
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <h6>Aggregated performance for all ACTIVE account listed bellow:</h6>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Account Name</th>
+                            <th>Account ID</th>
+                            <th>Spend</th>
+                            <th>Clicks</th>
+                            <th>Impressions</th>
+                            <th>Cost per Click</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for account  in  accounts%}
+                            <tr>
+                                <td>{{ account['_id']['accountName'] }}</td>
+                                <td>{{ account['_id']['accountId'] }}</td>
+                                <td>{{ account['spend'] }}</td>
+                                <td>{{ account['clicks'] }}</td>
+                                <td>{{ account['impressions'] }}</td>
+                                <td>{{ account['costPerClick'] }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
